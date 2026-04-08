@@ -849,6 +849,8 @@ for (const auto &path : m_paths) {
             ContentRegistry::Settings::add<Widgets::Checkbox>("hex.builtin.setting.interface", "hex.builtin.setting.interface.style", "hex.builtin.setting.interface.display_shortcut_highlights", true);
 
             {
+                ContentRegistry::Settings::add<Widgets::Checkbox>("hex.builtin.setting.interface", "hex.builtin.setting.interface.language", "hex.builtin.setting.interface.os_lang_on_startup", false);
+
                 std::vector<std::string> languageNames;
                 std::vector<nlohmann::json> languageCodes;
 

@@ -546,7 +546,7 @@ namespace hex::plugin::builtin {
                                                 if (ImGuiExt::DimmedIconToggle(onIcon.c_str(), offIcon.c_str(), &state)) {
                                                     ContentRegistry::Settings::write<bool>("hex.builtin.settings.quick_settings", unlocalizedTooltip, state);
                                                 }
-                                                if (id % 5 > 0)
+                                                if (id % 5 == 0)
                                                     ImGui::SameLine();
                                                 ImGui::SetItemTooltip("%s", Lang(unlocalizedTooltip).get());
                                                 ImGui::PopID();
@@ -693,6 +693,10 @@ namespace hex::plugin::builtin {
         ContentRegistry::UserInterface::addWelcomeScreenQuickSettingsToggle(ICON_VS_COMPASS_ACTIVE, ICON_VS_COMPASS, "hex.builtin.welcome.quick_settings.simplified", false, [](bool state) {
             s_simplifiedWelcomeScreen = state;
             WorkspaceManager::switchWorkspace(s_simplifiedWelcomeScreen ? "Minimal" : "Default");
+        });
+
+        ContentRegistry::UserInterface::addWelcomeScreenQuickSettingsToggle(ICON_VS_BOOK, ICON_VS_BOOK, "***", false, [](bool state) {
+            (void)state;
         });
 
         EventImHexStartupFinished::subscribe([]() {
