@@ -142,15 +142,15 @@ namespace hex::log {
 
             constexpr static auto MaxTagLength = 25;
             const auto totalLength = std::min(static_cast<size_t>(MaxTagLength),
-                                              projectName.length() + (threadName.empty() ? 0 : 3 + threadName.length()));
+                                              wolv::util::strlenUtf8(projectName) + (threadName.empty() ? 0 : 3 + wolv::util::strlenUtf8(threadName)));
 
             const auto remainingSpace = MaxTagLength - projectName.length() - 3;
 
             fmt::print(dest, "[{0:%H:%M:%S}] {1} [{2} | {3}] {4: <{5}} ",
                 now,
                 s_colorOutputEnabled ? fmt::format(ts, "{}", level) : level,
-                projectName.substr(0, std::min(projectName.length(), static_cast<size_t>(MaxTagLength))),
-                wolv::util::truncateUtf8(threadName, remainingSpace),
+                wolv::util::substrUtf8(projectName, 0, std::min(wolv::util::strlenUtf8(projectName), static_cast<size_t>(MaxTagLength))),
+                wolv::util::substrUtf8(threadName, 0, remainingSpace),
                 "",
                 MaxTagLength - totalLength
             );
