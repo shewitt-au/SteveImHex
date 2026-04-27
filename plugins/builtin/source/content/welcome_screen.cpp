@@ -695,10 +695,6 @@ namespace hex::plugin::builtin {
             WorkspaceManager::switchWorkspace(s_simplifiedWelcomeScreen ? "Minimal" : "Default");
         });
 
-        ContentRegistry::UserInterface::addWelcomeScreenQuickSettingsToggle(ICON_VS_BOOK, ICON_VS_BOOK, "***", false, [](bool state) {
-            (void)state;
-        });
-
         EventImHexStartupFinished::subscribe([]() {
             for (const auto &quickSetting : ContentRegistry::UserInterface::impl::getWelcomeScreenQuickSettingsToggles()) {
                 auto &setting = quickSetting.unlocalizedTooltip;
